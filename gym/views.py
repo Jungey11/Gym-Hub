@@ -54,6 +54,19 @@ def user_login(request):
             return redirect('user_login')
     return render(request, 'user_login.html', locals())
 
+def admin_home(request):
+    if not request.user.is_authenticated:
+        return redirect('admin_login')
+    totalcategory = Category.objects.all().count()
+    totalpackagetype = Packagetype.objects.all().count()
+    totalpackage = Package.objects.all().count()
+    totalbooking = Booking.objects.all().count()
+    New = Booking.objects.filter(status="1")
+    Partial = Booking.objects.filter(status="2")
+    Full = Booking.objects.filter(status="3")
+    return render(request, 'admin/admin_home.html', locals())
+
+
 def Logout(request):
     logout(request)
     messages.success(request, "Logout Successfully")
@@ -99,4 +112,6 @@ def random_with_N_digits(n):
     range_start = 10**(n-1)
     range_end = (10**n)-1
     return randint(range_start, range_end)
+
+
 
