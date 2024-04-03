@@ -6,6 +6,7 @@ from .models import *
 from .forms import *
 from random import randint
 
+
 # Create your views here.
 def index(request):
     if request.method == "POST":
@@ -395,3 +396,28 @@ def apply_booking(request, pid):
     booking = Booking.objects.create(package=data, register=register, bookingnumber=random_with_N_digits(10))
     messages.success(request, 'Booking Applied')
     return redirect('/')
+    
+# from django.shortcuts import render, redirect
+# from django.contrib import messages
+# from .models import Attendance  # Assuming you have a model named Attendance
+
+# def change_attendance(request):
+#     if request.method == "POST":
+#         member = request.POST.get('member')
+#         date = request.POST.get('date')
+#         status = request.POST.get('status')
+
+#         # Add validation here if needed
+
+#         # Create or update attendance record
+#         try:
+#             attendance, created = Attendance.objects.get_or_create(member=member, date=date)
+#             attendance.status = status
+#             attendance.save()
+#             messages.success(request, "Attendance updated successfully")
+#         except Exception as e:
+#             messages.error(request, f"Failed to update attendance: {str(e)}")
+
+#         return redirect('/')  # Redirect to the desired URL after changing attendance
+
+#     return render(request, 'change_attendance.html')  # Render the template for changing attendance

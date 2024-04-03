@@ -4,6 +4,7 @@ from gym.views import *
 from django.conf.urls.static import static
 from django.conf import settings
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('registration',registration, name="registration"),
     path('user_login/',user_login, name="user_login"),
     path('apply-booking/<int:pid>/', apply_booking, name="apply_booking"),
+    # path('attendance/',Attendance, name="attendance"),
     path('booking_detail/<int:pid>/', booking_detail, name="booking_detail"),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

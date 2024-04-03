@@ -44,7 +44,7 @@ ROOT_URLCONF = 'GymManagementSystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR,"templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,11 +65,14 @@ WSGI_APPLICATION = 'GymManagementSystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'Gym-Hub',
+        'USER':'root',
+        'PASSWORD':'Jungs#11',
+        'HOST': 'localhost', # Corrected hostname
+        'PORT': '3306', # Default MySQL port
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

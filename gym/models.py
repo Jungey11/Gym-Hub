@@ -56,3 +56,5 @@ class Paymenthistory(models.Model):
     price = models.CharField(max_length=100, null=True, blank=True)
     status = models.IntegerField(choices=STATUS, default=1)
     creationdate = models.DateTimeField(auto_now_add=True)
+
+
