@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
@@ -109,6 +110,50 @@ def user_change_password(request):
             messages.success(request, "New password and confirm password are not same.")
             return redirect('user_change_password')
     return render(request,'user_change_password.html')
+
+
+def add_attendance(request):
+    success_message = ''
+    if request.method == 'POST':
+        member_name = request.POST.get('member_name')
+        date = request.POST.get('date')
+        status = request.POST.get('status')
+        attendance.objects.create(member_name=member_name, date=date, status=status)
+        success_message = 'Attendance added successfully!'
+    attendance = attendance.objects.all()
+    return render(request, 'admin/attendance.html', {'attendances': attendances, 'success_message': success_message})
+
+def edit_attendance(request, pid):
+    if not request.user.is_authenticated:
+        return redirect('admin_login')
+    
+    error = ""
+    attendance = attendance.objects.get(id=pid)
+    
+    if request.method == "POST":
+        member_name = request.POST.get('member_name')
+        date = request.POST.get('date')
+        status = request.POST.get('status')
+
+        attendance.member_name = member_name
+        attendance.date = date
+        attendance.status = status
+
+        try:
+            attendance.save()
+            error = "no"
+        except:
+            error = "yes"
+    
+    return render(request, 'admin/editAttendance.html', locals())
+
+def delete_attendance(request, pid):
+    if not request.user.is_authenticated:
+        return redirect('admin_login')
+    
+    attendance = attendance.objects.get(id=pid)
+    attendance.delete()
+    return redirect('manageAttendance')
 
 def manageCategory(request):
     if not request.user.is_authenticated:
@@ -397,27 +442,5 @@ def apply_booking(request, pid):
     messages.success(request, 'Booking Applied')
     return redirect('/')
     
-# from django.shortcuts import render, redirect
-# from django.contrib import messages
-# from .models import Attendance  # Assuming you have a model named Attendance
 
-# def change_attendance(request):
-#     if request.method == "POST":
-#         member = request.POST.get('member')
-#         date = request.POST.get('date')
-#         status = request.POST.get('status')
 
-#         # Add validation here if needed
-
-#         # Create or update attendance record
-#         try:
-#             attendance, created = Attendance.objects.get_or_create(member=member, date=date)
-#             attendance.status = status
-#             attendance.save()
-#             messages.success(request, "Attendance updated successfully")
-#         except Exception as e:
-#             messages.error(request, f"Failed to update attendance: {str(e)}")
-
-#         return redirect('/')  # Redirect to the desired URL after changing attendance
-
-#     return render(request, 'change_attendance.html')  # Render the template for changing attendance

@@ -165,7 +165,7 @@
 {% if error == "no" %}
 <script>
     alert('Logged In Successfully');
-    window.location=('{% url 'admin_home' %}');
+    window.location.href = "{% url 'admin_home' %}";
 </script>
 {% endif %}
 

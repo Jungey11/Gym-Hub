@@ -70,7 +70,7 @@
 {% if error ==  "no" %}
 <script>
     alert('Category has been Updated');
-    window.location=('{% url 'manageCategory' %}');
+    window.location.href = "{% url 'manageCategory' %}";
 </script>
 {% endif %}
 

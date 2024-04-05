@@ -132,9 +132,9 @@
 {% if error == "no" %}
 <script>
     alert('Package Detail has been added');
-    window.location = ('{% url 'managePackage' %}');
-
+    window.location.href = "{% url 'managePackage' %}";
 </script>
+
 {% endif %}
 {% if error == "yes" %}
 <script>
@@ -144,6 +144,26 @@
 {% endif %}
 
 
+<!-- Add jQuery code here -->
+<script>
+    $(document).ready(function() {
+        $('#category').change(function(){
+            var url = $('#ProductForm').attr("data-subcategory-url");
+            var categoryId = $(this).val();
+    
+            $.ajax({
+                url: url,
+                data: {
+                    'category': categoryId
+                },
+                success: function(data){
+                    $('#subcategory').html(data);
+                }
+            });
+        });
+    });
+    </script>
+    
 <script>
     $('#category').change(function(){
     var url = $('#ProductForm').attr("data-subcategory-url");//get the url of the 'load_category' view

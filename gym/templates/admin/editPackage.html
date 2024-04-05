@@ -154,8 +154,7 @@
 {% if error ==  "no" %}
 <script>
     alert('Package Type has been Updated');
-    window.location=('{% url 'managePackageType' %}');
-
+    window.location.href = "{% url 'managePackageType' %}";
 </script>
 {% endif %}
 

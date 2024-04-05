@@ -57,4 +57,8 @@ class Paymenthistory(models.Model):
     status = models.IntegerField(choices=STATUS, default=1)
     creationdate = models.DateTimeField(auto_now_add=True)
 
+class Manage_Attendance(models.Model):
+    user = models.ForeignKey(Signup, on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateField()
+    status = models.CharField(max_length=100, null=True, blank=True)  
 
