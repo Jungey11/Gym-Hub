@@ -83,38 +83,38 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                <tr>
-                                                <th>SN</th>
-                                                <th>Booking Id</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Booking Date</th>
-                                                <th>Package Name</th>
-                                                <th>Title</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
+                                  <tr>
+                                    <th>SN</th>
+                                    <th>Booking Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Booking Date</th>
+                                    <th>Package Name</th>
+                                    <th>Title</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
 
-                                            <tbody>
-                                            {% for i in data %}
-                                            <tr>
-                                                <th scope="row">{{forloop.counter}}</th>
-                                                <td>{{i.id}}</td>
-                                                <td>{{i.register.user.first_name}} {{i.register.user.last_name}}</td>
-                                                 <td><span id="email-{{forloop.counter}}" class="password">{{i.register.user.username}}</span>
-                                                     <button type="button" class="btn btn-success" id="email-btn-{{forloop.counter}}" onclick="togglePassword('email-{{forloop.counter}}', this.id)"><i class="fa fa-eye"></i></button>
-                                                 </td>
-                                                 <td>{{i.creationdate}}</td>
-                                                <td>{{i.package.packagename}}</td>
-                                                <td>{{i.package.titlename}}</td>
-                                                <td><a href="{% url 'booking_detail' i.id %}"
-                                                       class="btn btn-primary">View</a> |
-                                                    <a href="{% url 'deleteBooking' i.id %}"
-                                                       onclick="return confirm('Are you sure to Delete')"
-                                                       class="btn btn-danger">Delete</a>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
+                                <tbody>
+                                  {% for i in data %}
+                                  <tr>
+                                      <th scope="row">{{forloop.counter}}</th>
+                                      <td>{{i.id}}</td>
+                                      <td>{{i.register.user.first_name}} {{i.register.user.last_name}}</td>
+                                      <td><span id="email-{{forloop.counter}}" class="password">{{i.register.user.username}}</span>
+                                          <button type="button" class="btn btn-success" id="email-btn-{{forloop.counter}}" onclick="togglePassword('email-{{forloop.counter}}', this.id)"><i class="fa fa-eye"></i></button>
+                                      </td>
+                                      <td>{{i.creationdate}}</td>
+                                      <td>{{i.package.packagename}}</td>
+                                      <td>{{i.package.titlename}}</td>
+                                      <td><a href="{% url 'booking_detail' i.id %}"
+                                            class="btn btn-primary">View</a> |
+                                          <a href="{% url 'deleteBooking' i.id %}"
+                                            onclick="return confirm('Are you sure to Delete')"
+                                            class="btn btn-danger">Delete</a>
+                                      </td>
+                                  </tr>
+                                  {% endfor %}
                                 </tbody>
                             </table>
                         </div>

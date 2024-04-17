@@ -86,12 +86,11 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <fieldset>
-                                    <input type="text" name="firstname" placeholder="First Name" required>
-                                </fieldset>
+                                    <input type="text" id="firstname" name="firstname" placeholder="First Name" required>                                </fieldset>
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <fieldset>
-                                    <input type="text" name="secondname" placeholder="Last Name" required>
+                                    <input type="text" id="secondname" name="secondname" placeholder="Last Name" required>
                                 </fieldset>
                             </div>
 
@@ -133,6 +132,46 @@
     </div>
 </section>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function validateForm() {
+            var firstname = document.getElementById('firstname').value;
+            var secondname = document.getElementById('secondname').value;
+            var email = document.getElementById('email').value;
+            var mobile = document.getElementById('mobile').value;
+            var address = document.getElementById('address').value;
+            var password = document.getElementById('password').value;
+
+             // Regular expressions
+            var nameRegex = /^[a-zA-Z]+(?:[\s'-][a-zA-Z]+)*$/;
+            var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            var mobileRegex = /^\d{10}$/;
+
+    
+            if (firstname === "" || secondname === "" || email === "" || mobile === "" || address === "" || password === "") {
+                alert('All fields must be filled out');
+                return false;
+            }
+    
+            if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+                alert('Invalid email format');
+                return false;
+            }
+    
+            if (!mobile.match(/^\d{10}$/)) {
+                alert('Invalid mobile number, must be 10 digits');
+                return false;
+            }
+    
+            return true; // Continue with the form submission if validation is successful
+        }
+    
+        // Attach the validateForm function to the form's submit event
+        document.querySelector('form').onsubmit = validateForm;
+    });
+    </script>
+    
+    
 {% if error == "no" %}
 <script>
     alert('Logged In Successfully');

@@ -112,48 +112,18 @@ def user_change_password(request):
     return render(request,'user_change_password.html')
 
 
-def add_attendance(request):
-    success_message = ''
+
+def manage_attendance(request):
     if request.method == 'POST':
         member_name = request.POST.get('member_name')
         date = request.POST.get('date')
         status = request.POST.get('status')
-        attendance.objects.create(member_name=member_name, date=date, status=status)
-        success_message = 'Attendance added successfully!'
-    attendance = attendance.objects.all()
-    return render(request, 'admin/attendance.html', {'attendances': attendances, 'success_message': success_message})
+        Attendance.objects.create(member_name=member_name, date=date, status=status)
+        return redirect('manage_attendance')
 
-def edit_attendance(request, pid):
-    if not request.user.is_authenticated:
-        return redirect('admin_login')
-    
-    error = ""
-    attendance = attendance.objects.get(id=pid)
-    
-    if request.method == "POST":
-        member_name = request.POST.get('member_name')
-        date = request.POST.get('date')
-        status = request.POST.get('status')
+    attendance = Attendance.objects.all()
+    return render(request, 'admin/manage_attendance.html', {'attendance': attendance})
 
-        attendance.member_name = member_name
-        attendance.date = date
-        attendance.status = status
-
-        try:
-            attendance.save()
-            error = "no"
-        except:
-            error = "yes"
-    
-    return render(request, 'admin/editAttendance.html', locals())
-
-def delete_attendance(request, pid):
-    if not request.user.is_authenticated:
-        return redirect('admin_login')
-    
-    attendance = attendance.objects.get(id=pid)
-    attendance.delete()
-    return redirect('manageAttendance')
 
 def manageCategory(request):
     if not request.user.is_authenticated:

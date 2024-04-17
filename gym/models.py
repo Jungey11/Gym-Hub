@@ -43,6 +43,7 @@ class Package(models.Model):
         return self.titlename
 
 STATUS = ((1, "Not Updated Yet"), (2, "Partial Payment"), (3, 'Full Payment'))
+
 class Booking(models.Model):
     package = models.ForeignKey(Package, on_delete=models.CASCADE, null=True, blank=True)
     register = models.ForeignKey(Signup, on_delete=models.CASCADE, null=True, blank=True)
@@ -57,8 +58,12 @@ class Paymenthistory(models.Model):
     status = models.IntegerField(choices=STATUS, default=1)
     creationdate = models.DateTimeField(auto_now_add=True)
 
-class Manage_Attendance(models.Model):
-    user = models.ForeignKey(Signup, on_delete=models.CASCADE, null=True, blank=True)
-    date = models.DateField()
-    status = models.CharField(max_length=100, null=True, blank=True)  
 
+class Attendance(models.Model):
+    member_id = models.AutoField(primary_key=True, default=0)  # Use AutoField for auto-incrementing primary key
+    member_name = models.CharField(max_length=100)
+    date = models.DateField()
+    status = models.CharField(max_length=20, choices=[('Present', 'Present'), ('Absent', 'Absent')])
+
+    def __str__(self):
+        return str(self.member_id)

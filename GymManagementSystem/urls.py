@@ -5,8 +5,6 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
@@ -37,10 +35,6 @@ urlpatterns = [
     path('user_login/',user_login, name="user_login"),
     path('apply-booking/<int:pid>/', apply_booking, name="apply_booking"),
     path('booking_detail/<int:pid>/', booking_detail, name="booking_detail"),
-    # path('attendance/', Manage_Attendance, name="attendance"),
-    path('add-attendance/', add_attendance, name='add_attendance'),
-    path('edit-attendance/<int:attendance_id>/', edit_attendance, name='edit_attendance'),
-    path('delete-attendance/<int:attendance_id>/', delete_attendance, name='delete_attendance'),
-
+    path('manage_attendance/', manage_attendance, name='manage_attendance'),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

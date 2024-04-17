@@ -92,18 +92,11 @@
         {% if data %}
 
         <div class="container">
-          <h4>B/w Dates 
-            {% if request.GET.type %}
-              {{ request.GET.type }}
-            {% else %}
-              {% if request.GET.action %}
-                {{ request.GET.action }}
-              {% else %}
-                report
-              {% endif %}
-            {% endif %}
-            from "{{fromdate}}" to "{{todate}}"
-            </h4>
+          <h4>
+            B/w Dates {% if request.GET.type %} {{ request.GET.type }} {% else
+            %} {% if request.GET.action %} {{ request.GET.action }} {% else %}
+            report {% endif %} {% endif %} from "{{fromdate}}" to "{{todate}}"
+          </h4>
 
           <div class="card-block table-border-style">
             <div class="table-responsive">
