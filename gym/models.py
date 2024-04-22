@@ -60,7 +60,7 @@ class Paymenthistory(models.Model):
 
 
 class Attendance(models.Model):
-    member_id = models.AutoField(primary_key=True, default=0)  # Use AutoField for auto-incrementing primary key
+    member_id = models.AutoField(primary_key=True)  
     member_name = models.CharField(max_length=100)
     date = models.DateField()
     status = models.CharField(max_length=20, choices=[('Present', 'Present'), ('Absent', 'Absent')])
